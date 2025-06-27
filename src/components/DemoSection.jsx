@@ -74,7 +74,12 @@ const DemoSection = () => {
     setTimeout(() => setCurrentStep(5), 9000)
   }
 
-  const toggleVoice = () => {
+  const toggleVoice = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    console.log('Microphone button clicked!')
+    
     if (!speechSupported) {
       alert('Speech recognition is not supported in your browser. Please try Chrome or Edge.')
       return
@@ -87,8 +92,10 @@ const DemoSection = () => {
 
     try {
       if (isListening) {
+        console.log('Stopping recognition...')
         recognition.stop()
       } else {
+        console.log('Starting recognition...')
         recognition.start()
       }
     } catch (error) {
@@ -149,10 +156,8 @@ const DemoSection = () => {
                       onFocus={(e) => e.target.style.borderColor = '#a855f7'}
                       onBlur={(e) => e.target.style.borderColor = 'transparent'}
                     />
-                    <motion.button 
+                    <button 
                       onClick={toggleVoice}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
                       style={{
                         background: isListening ? 'linear-gradient(45deg, #ef4444, #f97316)' : 'linear-gradient(45deg, #6366f1, #8b5cf6)',
                         border: 'none',
@@ -166,12 +171,17 @@ const DemoSection = () => {
                         justifyContent: 'center',
                         minWidth: '60px',
                         minHeight: '60px',
-                        opacity: speechSupported ? 1 : 0.5
+                        opacity: speechSupported ? 1 : 0.5,
+                        position: 'relative',
+                        zIndex: 10,
+                        transition: 'all 0.3s ease'
                       }}
                       title={speechSupported ? (isListening ? 'Stop recording' : 'Start voice input') : 'Speech recognition not supported'}
+                      onMouseOver={(e) => e.target.style.transform = 'scale(1.1)'}
+                      onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                     >
                       {isListening ? <MicOff size={24} /> : <Mic size={24} />}
-                    </motion.button>
+                    </button>
                   </div>
                   {!speechSupported && (
                     <p style={{ color: '#f59e0b', fontSize: '0.9rem', textAlign: 'center', marginBottom: '1rem' }}>
