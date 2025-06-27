@@ -7,18 +7,33 @@ const DemoSection = () => {
   const [vibeInput, setVibeInput] = useState('')
   const [isListening, setIsListening] = useState(false)
   const [recognition, setRecognition] = useState(null)
+  const [speechSupported, setSpeechSupported] = useState(false)
 
   useEffect(() => {
     // Initialize speech recognition
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      setSpeechSupported(true)
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
       const recognitionInstance = new SpeechRecognition()
       recognitionInstance.continuous = false
       recognitionInstance.interimResults = true
       recognitionInstance.lang = 'en-US'
 
-      recognitionInstance.onstart = () => setIsListening(true)
-      recognitionInstance.onend = () => setIsListening(false)
+      recognitionInstance.onstart = () => {
+        console.log('Speech recognition started')
+        setIsListening(true)
+      }
+      
+      recognitionInstance.onend = () => {
+        console.log('Speech recognition ended')
+        setIsListening(false)
+      }
+      
+      recognitionInstance.onerror = (event) => {
+        console.error('Speech recognition error:', event.error)
+        setIsListening(false)
+      }
+      
       recognitionInstance.onresult = (event) => {
         let transcript = ''
         for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -26,10 +41,15 @@ const DemoSection = () => {
             transcript += event.results[i][0].transcript
           }
         }
-        setVibeInput(transcript)
+        if (transcript) {
+          setVibeInput(transcript)
+        }
       }
 
       setRecognition(recognitionInstance)
+    } else {
+      setSpeechSupported(false)
+      console.log('Speech recognition not supported')
     }
   }, [])
 
@@ -55,12 +75,25 @@ const DemoSection = () => {
   }
 
   const toggleVoice = () => {
-    if (recognition) {
+    if (!speechSupported) {
+      alert('Speech recognition is not supported in your browser. Please try Chrome or Edge.')
+      return
+    }
+
+    if (!recognition) {
+      alert('Speech recognition is not available.')
+      return
+    }
+
+    try {
       if (isListening) {
         recognition.stop()
       } else {
         recognition.start()
       }
+    } catch (error) {
+      console.error('Error toggling speech recognition:', error)
+      alert('Error with speech recognition. Please try again.')
     }
   }
 
@@ -130,12 +163,21 @@ const DemoSection = () => {
                         fontSize: '1.5rem',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        minWidth: '60px',
+                        minHeight: '60px',
+                        opacity: speechSupported ? 1 : 0.5
                       }}
+                      title={speechSupported ? (isListening ? 'Stop recording' : 'Start voice input') : 'Speech recognition not supported'}
                     >
                       {isListening ? <MicOff size={24} /> : <Mic size={24} />}
                     </motion.button>
                   </div>
+                  {!speechSupported && (
+                    <p style={{ color: '#f59e0b', fontSize: '0.9rem', textAlign: 'center', marginBottom: '1rem' }}>
+                      💡 Voice input works best in Chrome or Edge browsers
+                    </p>
+                  )}
                   <motion.button 
                     onClick={processVibe}
                     className="cta-button"
