@@ -2,13 +2,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 const Hero = () => {
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section id="hero" className="hero">
       <div className="container">
@@ -24,15 +17,15 @@ const Hero = () => {
           <div className="cta-buttons">
             <a 
               className="cta-button" 
-              onClick={() => scrollToSection('demo')}
+              href="/dashboard"
             >
-              Start Building Now
+              Enter Dashboard
             </a>
             <a 
               className="cta-button secondary" 
-              onClick={() => scrollToSection('demo')}
+              href="/register"
             >
-              🎤 Try Voice Demo
+              Join AI Swarm
             </a>
           </div>
         </motion.div>

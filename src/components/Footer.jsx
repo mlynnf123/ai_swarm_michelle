@@ -44,7 +44,7 @@ const Footer = () => {
         >
           <motion.a 
             className="cta-button"
-            onClick={() => scrollToSection('demo')}
+            href="/dashboard"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

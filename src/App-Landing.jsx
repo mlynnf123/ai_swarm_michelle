@@ -14,7 +14,7 @@ import BackgroundElements from './components/BackgroundElements'
 import LiveActivity from './components/LiveActivity'
 import CryptoTicker from './components/CryptoTicker'
 
-function App() {
+function AppLanding() {
   return (
     <div className="App">
       <BackgroundElements />
@@ -38,4 +38,4 @@ function App() {
   )
 }
 
-export default App
+export default AppLanding
