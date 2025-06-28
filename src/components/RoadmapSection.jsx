@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 
 const RoadmapPhase = ({ title, timeframe, items, color, isLeft, delay }) => (
   <motion.div 
+    className="roadmap-phase"
     style={{ 
       display: 'flex', 
       alignItems: 'center', 
@@ -149,7 +150,7 @@ const RoadmapSection = () => {
         >
           <h2>Roadmap & <span className="highlight">What's Next</span></h2>
           
-          <div style={{ position: 'relative', marginTop: '4rem' }}>
+          <div className="roadmap-timeline" style={{ position: 'relative', marginTop: '4rem' }}>
             {/* Timeline line */}
             <motion.div 
               style={{

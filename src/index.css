@@ -383,10 +383,128 @@ body {
   opacity: 0.9;
 }
 
+/* Mobile Menu Button */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0;
+}
+
+.hamburger span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger span:nth-child(3) {
+  bottom: 0;
+}
+
+.hamburger.open span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(10, 10, 15, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav-links li {
+  margin: 2rem 0;
+}
+
+.mobile-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: block;
+  padding: 1rem;
+}
+
+.mobile-nav-links a:hover {
+  color: #a855f7;
+  transform: scale(1.1);
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .live-stats {
+    display: none;
+  }
+  
+  .nav-container {
+    padding: 0 1rem;
   }
   
   .hero h1 {
@@ -404,6 +522,179 @@ body {
   .cta-buttons {
     flex-direction: column;
     align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem !important;
+  }
+  
+  .problem-stats {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Demo Section Mobile Improvements */
+  input[type="text"], textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px; /* Touch-friendly minimum */
+  }
+  
+  button {
+    min-height: 44px; /* Touch-friendly minimum */
+    min-width: 44px;
+  }
+  
+  /* Make microphone button more touch-friendly */
+  .voice-button {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2rem !important;
+  }
+  
+  /* Improve range sliders for mobile */
+  input[type="range"] {
+    height: 44px;
+    appearance: none;
+    background: transparent;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    background: #a855f7;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  input[type="range"]::-webkit-slider-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
+  
+  /* Roadmap Mobile Layout - Stack vertically */
+  .roadmap-phase {
+    flex-direction: column !important;
+    text-align: center !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .roadmap-phase > div:first-child {
+    flex: none !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin-bottom: 1rem;
+  }
+  
+  .roadmap-phase .card {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  /* Hide the timeline line and dots on mobile */
+  .roadmap-timeline::before {
+    display: none !important;
+  }
+  
+  .roadmap-phase > div[style*="position: absolute"] {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 1rem auto !important;
+    width: 15px !important;
+    height: 15px !important;
+  }
+  
+  /* Typography improvements for mobile */
+  .hero p {
+    font-size: 1.2rem !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 1rem;
+  }
+  
+  .tagline {
+    font-size: 1rem !important;
+    margin-bottom: 2rem !important;
+    padding: 0 1rem;
+  }
+  
+  .tagline::before,
+  .tagline::after {
+    display: none; /* Hide quotes on mobile for cleaner look */
+  }
+  
+  /* Section spacing for mobile */
+  .section h2 {
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 1rem;
+  }
+  
+  .card {
+    padding: 1.5rem !important;
+    margin: 0 0.5rem;
+  }
+  
+  /* Footer improvements */
+  .footer-cta {
+    text-align: center !important;
+    padding: 2rem 1rem !important;
+  }
+  
+  .footer-cta h2 {
+    font-size: 2rem !important;
+  }
+  
+  /* Live activity adjustments */
+  .live-activity {
+    width: 280px !important;
+    right: 0.5rem !important;
+  }
+  
+  /* Crypto ticker mobile */
+  .crypto-ticker {
+    font-size: 0.9rem !important;
+    padding: 0.5rem !important;
+  }
+}
+
+/* Extra small screens - phones in landscape */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .nav-container {
+    padding: 0 0.5rem !important;
+  }
+  
+  .container {
+    padding: 0 0.5rem !important;
+  }
+  
+  .section {
+    padding: 2rem 0 !important;
+  }
+  
+  .section h2 {
+    font-size: 2rem !important;
+  }
+  
+  .card {
+    padding: 1rem !important;
+    margin: 0 0.25rem !important;
+  }
+  
+  .cta-button {
+    padding: 1rem 2rem !important;
+    font-size: 1rem !important;
   }
 }
 

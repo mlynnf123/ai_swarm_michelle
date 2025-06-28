@@ -144,7 +144,6 @@ const DemoSection = () => {
                       style={{
                         width: '100%',
                         padding: '1.5rem',
-                        border: 'none',
                         borderRadius: '15px',
                         background: 'rgba(255, 255, 255, 0.1)',
                         color: 'white',

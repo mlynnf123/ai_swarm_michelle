@@ -30,7 +30,7 @@ const CaseStudy = ({ name, location, avatar, before, after, vibe, delay }) => (
         <p style={{ opacity: 0.7 }}>{location}</p>
       </div>
     </div>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', margin: '1rem 0' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', margin: '1rem 0' }}>
       <div style={{
         padding: '1rem',
         borderRadius: '10px',
@@ -137,7 +137,7 @@ const CaseStudiesSection = () => {
         >
           <h2><span className="highlight">Success</span> Stories</h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
             {caseStudies.map((study, index) => (
               <CaseStudy 
                 key={index}

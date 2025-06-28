@@ -49,7 +49,7 @@ const EconomicsSection = () => {
             viewport={{ once: true }}
           >
             <h3 style={{ textAlign: 'center', marginBottom: '2rem', color: '#10b981' }}>💰 Earnings Potential</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '0.5rem' }}>Apps per week: {appsPerWeek}</label>
                 <input 
@@ -108,7 +108,7 @@ const EconomicsSection = () => {
             viewport={{ once: true }}
           >
             <h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>📊 Revenue Distribution</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '2rem' }}>
               <motion.div 
                 style={{ textAlign: 'center' }}
                 whileHover={{ scale: 1.05 }}
